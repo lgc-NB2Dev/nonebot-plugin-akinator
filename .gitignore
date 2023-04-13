@@ -169,3 +169,6 @@ cython_debug/
 # poetry.toml
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+.env.*
+bot.py
+.vscode/
