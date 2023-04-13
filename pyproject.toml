@@ -1,5 +1,5 @@
 [project]
-name = "nonebot-plugin-template"
+name = "nonebot-plugin-akinator"
 version = "0.1.0"
 description = "Template plugin project"
 authors = [{ name = "student_2333", email = "lgc2333@126.com" }]
@@ -13,7 +13,7 @@ readme = "README.md"
 license = { text = "MIT" }
 
 [project.urls]
-homepage = "https://github.com/owner/nonebot-plugin-template"
+homepage = "https://github.com/lgc2333/nonebot-plugin-akinator"
 
 [project.optional-dependencies]
 dev = [
