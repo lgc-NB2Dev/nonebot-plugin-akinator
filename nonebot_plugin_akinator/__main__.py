@@ -65,7 +65,7 @@ async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
             await current_game.close()
             await matcher.finish("已退出游戏")
 
-        if ans == "p":
+        if ans == "q":
             try:
                 await current_game.back()
             except:
