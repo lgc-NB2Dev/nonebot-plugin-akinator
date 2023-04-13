@@ -37,7 +37,7 @@ async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
 
     # 游戏已开始，但是没带参数
     if current_game and (not ans):
-        await matcher.finish("要重新开始，请使用 [aki q] 命令退出该局游戏")
+        await matcher.finish("要重新开始，请使用 [aki e] 命令退出该局游戏")
 
     # 还没有开始
     if not current_game:
