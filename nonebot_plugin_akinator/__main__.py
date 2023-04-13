@@ -1,6 +1,6 @@
-from contextlib import suppress
 from typing import Dict, Literal, Union
 
+from aiohttp import ClientSession
 from nonebot import logger, on_command
 from nonebot.adapters.onebot.v11 import (
     GroupMessageEvent,
@@ -11,6 +11,7 @@ from nonebot.adapters.onebot.v11 import (
 from nonebot.matcher import Matcher
 from nonebot.params import CommandArg
 
+from .config import config
 from .game import Akinator
 
 RUNNING_GAMES: Dict[int, Dict[int, Union[Akinator, Literal[True]]]] = {}
@@ -90,16 +91,24 @@ async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
 
         if current_game.progression >= 95:
             guess = None
-            with suppress(Exception):
+            try:
                 guess = await current_game.win()
+                async with ClientSession() as s:
+                    async with s.get(
+                        guess["absolute_picture_path"],
+                        proxy=config.proxy,
+                    ) as r:
+                        pic = await r.read()
+            except:
+                logger.exception("获取游戏结果失败")
+                await matcher.finish("获取游戏结果失败")
+            finally:
+                await current_game.close()
+                del group_games[event.user_id]
 
-            await current_game.close()
-            del group_games[event.user_id]
-
-            if guess:
-                await matcher.finish(f"游戏结束，我猜的答案是 {guess['name']}")
-
-            await matcher.finish("获取游戏结果失败")
+            await matcher.finish(
+                f"游戏结束，我猜的答案是 {guess['name']}" + MessageSegment.image(pic),
+            )
 
     try:
         pic = await current_game.draw_question_img()
