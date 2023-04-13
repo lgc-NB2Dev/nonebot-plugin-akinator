@@ -52,6 +52,7 @@ async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
         try:
             await current_game.start_game()
         except:
+            await current_game.close()
             del group_games[event.user_id]
             logger.exception("开始游戏失败")
             await matcher.finish("开始游戏失败，请重试")
