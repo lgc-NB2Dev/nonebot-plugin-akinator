@@ -98,7 +98,7 @@ class Akinator(BaseAkinator):
 
         answer_text = (
             Text2Image.from_text(
-                ("1. 是  |  2. 否  |  3. 不知道\n4. 或许是  |  5. 或许不是\n上一题 (P)  |  退出 (E)"),
+                ("1. 是  |  2. 否  |  3. 不知道\n4. 或许是  |  5. 或许不是\n上一题 (Q)  |  退出 (E)"),
                 40,
                 align="center",
                 weight="bold",
