@@ -657,8 +657,8 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.2"
-groups = ["default", "dev"]
-content_hash = "sha256:b91477f955cfd5a5427c881118dabdbe552b414668dbdc7198c2f44d10603493"
+groups = ["default", "dev", "optional"]
+content_hash = "sha256:d4aa0c2563b1574d99d744a9a07a8585e185d57edbf8cebabbe39bb58a36f847"
 
 [metadata.files]
 "aiodns 3.0.0" = [
