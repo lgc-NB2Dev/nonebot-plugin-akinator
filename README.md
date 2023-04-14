@@ -12,7 +12,7 @@
 
 # NoneBot-Plugin-Akinator
 
-_✨ NoneBot 插件简单描述 ✨_
+_✨ 网络天才 ✨_
 
 <a href="./LICENSE">
   <img src="https://img.shields.io/github/license/lgc2333/nonebot-plugin-akinator.svg" alt="license">
@@ -32,7 +32,7 @@ _✨ NoneBot 插件简单描述 ✨_
 
 ## 📖 介绍
 
-这里是插件的详细介绍部分
+把网络天才 Akinator 搬进你的 Bot !
 
 ## 💿 安装
 
@@ -101,23 +101,27 @@ plugins = [
 
 在 nonebot2 项目的`.env`文件中添加下表中的必填配置
 
-|  配置项  | 必填 | 默认值 |   说明   |
-| :------: | :--: | :----: | :------: |
-| 配置项 1 |  是  |   无   | 配置说明 |
-| 配置项 2 |  否  |   无   | 配置说明 |
+|        配置项         | 必填 | 默认值  |                          说明                          |
+| :-------------------: | :--: | :-----: | :----------------------------------------------------: |
+|        `PROXY`        |  否  |   无    |                访问 Akinator 使用的代理                |
+| `AKINATOR_CHILD_MODE` |  否  | `False` | 是否启用 Akinator 的儿童模式（结果不会出现 NSFW 角色） |
+|  `AKINATOR_LANGUAGE`  |  否  |  `cn`   |                    Akinator 的语言                     |
 
 ## 🎉 使用
 
-### 指令表
+发送指令 `akinator` / `aki` 即可开始游戏
 
-|  指令  | 权限 | 需要@ | 范围 |   说明   |
-| :----: | :--: | :---: | :--: | :------: |
-| 指令 1 | 主人 |  否   | 私聊 | 指令说明 |
-| 指令 2 | 群员 |  是   | 群聊 | 指令说明 |
+开始游戏后，直接发送你的答案即可（序号和文字均可）
 
 ### 效果图
 
-如果有效果图的话
+<details>
+  <summary>点击展开</summary>
+
+![Alt text](readme/QQ%E5%9B%BE%E7%89%8720230415063509.png)  
+![Alt text](readme/QQ%E5%9B%BE%E7%89%8720230415063607.png)
+
+</details>
 
 ## 📞 联系
 
@@ -128,7 +132,9 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 
 ## 💡 鸣谢
 
-如果有要鸣谢的人的话
+### [Infiniticity/akinator.py](https://github.com/Infiniticity/akinator.py)
+
+- Akinator API 的封装
 
 ## 💰 赞助
 
