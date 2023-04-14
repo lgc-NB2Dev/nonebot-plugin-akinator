@@ -136,6 +136,10 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 
 - Akinator API 的封装
 
+### [MeetWq/pil-utils](https://github.com/MeetWq/pil-utils/)
+
+- Pillow 工具库
+
 ## 💰 赞助
 
 感谢大家的赞助！你们的赞助将是我继续创作的动力！
