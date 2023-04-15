@@ -16,7 +16,7 @@ from .game import Akinator
 cmd_start = on_command("akinator", aliases={"aki"})
 
 
-def get_group_id_and_user_id(event: MessageEvent) -> tuple[int, int]:
+def get_group_id_and_user_id(event: MessageEvent) -> Tuple[int, int]:
     group_id = event.group_id if isinstance(event, GroupMessageEvent) else 0
     user_id = event.user_id
     return group_id, user_id
