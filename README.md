@@ -118,8 +118,8 @@ plugins = [
 <details>
   <summary>点击展开</summary>
 
-![Alt text](https://media.githubusercontent.com/media/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063509.png)  
-![Alt text](https://media.githubusercontent.com/media/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063607.png)
+![Alt text](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063509.png)  
+![Alt text](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063607.png)
 
 </details>
 
