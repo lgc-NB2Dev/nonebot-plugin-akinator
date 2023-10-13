@@ -1,7 +1,7 @@
 from contextlib import suppress
 from io import BytesIO
 from pathlib import Path
-from typing import Awaitable, Callable, List, Optional
+from typing import Awaitable, Callable, Dict, Optional
 
 from aiohttp import ClientSession
 from nonebot import logger
@@ -24,7 +24,7 @@ IMG_SURPRISE = BuildImage.open(RES_PATH / "surprise.webp")
 IMG_TENSION = BuildImage.open(RES_PATH / "tension.webp")
 IMG_VRAI_DECOURAGEMENT = BuildImage.open(RES_PATH / "vrai_decouragement.webp")
 
-RUNNING_GAMES: List["Akinator"] = []
+RUNNING_GAMES: Dict[str, "Akinator"] = {}
 
 
 class OperatingError(Exception):
@@ -47,27 +47,22 @@ def change_operating(async_func: Callable[..., Awaitable]):
 
 
 class Akinator(BaseAkinator):
-    group_id: int
-    user_id: int
+    session_id: str
 
     old_progression: float = 0.0
     operating: bool = False
 
-    def __init__(self, group_id: int, user_id: int, *args, **kwargs):
-        if self.get(group_id, user_id):
+    def __init__(self, session_id: str, *args, **kwargs):
+        if self.get(session_id):
             raise ValueError("Game already created")
 
-        self.group_id = group_id
-        self.user_id = user_id
-        RUNNING_GAMES.append(self)
+        self.session_id = session_id
+        RUNNING_GAMES[session_id] = self
         super().__init__(*args, proxy=config.proxy, **kwargs)
 
     @staticmethod
-    def get(group_id: int, user_id: int) -> Optional["Akinator"]:
-        li = [
-            x for x in RUNNING_GAMES if x.group_id == group_id and x.user_id == user_id
-        ]
-        return li[0] if li else None
+    def get(session_id: str) -> Optional["Akinator"]:
+        return RUNNING_GAMES.get(session_id)
 
     @change_operating
     async def start_game(self, *args, **kwargs) -> str:
@@ -94,8 +89,7 @@ class Akinator(BaseAkinator):
 
     async def close(self):
         with suppress(ValueError):
-            RUNNING_GAMES.remove(self)
-
+            del RUNNING_GAMES[self.session_id]
         return await super().close()
 
     def get_akitude(self) -> BuildImage:
@@ -211,7 +205,7 @@ class Akinator(BaseAkinator):
             async with ClientSession() as s:
                 async with s.get(data["absolute_picture_path"]) as r:
                     target_pic = await r.read()
-        except:
+        except Exception:
             logger.exception("获取猜想对象图片失败")
 
         # draw

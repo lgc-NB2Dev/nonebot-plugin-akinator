@@ -1,14 +1,13 @@
 from typing import Dict, Tuple
 
 from nonebot import on_command, on_message
-from nonebot.adapters.onebot.v11 import (
-    GroupMessageEvent,
-    MessageEvent,
-    MessageSegment,
-)
+from nonebot.adapters import Message
 from nonebot.log import logger
 from nonebot.matcher import Matcher
+from nonebot.params import EventMessage
 from nonebot.typing import T_State
+from nonebot_plugin_saa import Image, MessageFactory
+from nonebot_plugin_session import SessionId, SessionIdType
 
 from .akinator.akinator.exceptions import AkiNoQuestions, CantGoBackAnyFurther
 from .game import Akinator
@@ -16,30 +15,22 @@ from .game import Akinator
 cmd_start = on_command("akinator", aliases={"aki"})
 
 
-def get_group_id_and_user_id(event: MessageEvent) -> Tuple[int, int]:
-    group_id = event.group_id if isinstance(event, GroupMessageEvent) else 0
-    user_id = event.user_id
-    return group_id, user_id
-
-
 @cmd_start.handle()
-async def _(matcher: Matcher, event: MessageEvent):
-    group_id, user_id = get_group_id_and_user_id(event)
-
-    game = Akinator.get(group_id, user_id)
+async def _(matcher: Matcher, session_id: str = SessionId(SessionIdType.GROUP_USER)):
+    game = Akinator.get(session_id)
     if game:
         await matcher.finish("已有游戏正在进行中，如果想结束，请先发送「E」结束游戏", at_sender=True)
 
-    game = Akinator(group_id, user_id)
+    game = Akinator(session_id)
     try:
         await game.start_game()
         pic = game.draw_question_img()
-    except:
+    except Exception:
         await game.close()
         logger.exception("启动游戏失败")
         await matcher.finish("启动游戏失败，请检查后台输出")
 
-    await matcher.finish(MessageSegment.image(pic), at_sender=True)
+    await MessageFactory(Image(pic)).finish(at_sender=True)
 
 
 ARG_DICT: Dict[str, Tuple[str, ...]] = {
@@ -53,12 +44,15 @@ ARG_DICT: Dict[str, Tuple[str, ...]] = {
 }
 
 
-async def handle_game_rule(event: MessageEvent, state: T_State) -> bool:
-    group_id, user_id = get_group_id_and_user_id(event)
-    game = Akinator.get(group_id, user_id)
+async def handle_game_rule(
+    state: T_State,
+    message: Message = EventMessage(),
+    session_id: str = SessionId(SessionIdType.GROUP_USER),
+) -> bool:
+    game = Akinator.get(session_id)
 
     if game:
-        arg = event.message.extract_plain_text().strip().lower()
+        arg = message.extract_plain_text().strip().lower()
 
         for k, v in ARG_DICT.items():
             if arg in v:
@@ -111,34 +105,4 @@ async def _(matcher: Matcher, state: T_State):
 
         await matcher.finish("遇到错误，结束游戏……", at_sender=True)
 
-    if win:
-        await matcher.pause(
-            MessageSegment.image(pic) + "如果结果不对，你可以发送「C」继续答题",
-            at_sender=True,
-        )
-
-    await matcher.finish(MessageSegment.image(pic), at_sender=True)
-
-
-CONTINUE_WORDS = ("c", "continue", "继续")
-
-
-@answer_handler.handle()
-async def _(matcher: Matcher, event: MessageEvent, state: T_State):
-    game: Akinator = state["game"]
-    msg = event.message.extract_plain_text().strip().lower()
-
-    if msg not in CONTINUE_WORDS:
-        # logger.debug("结束游戏")
-        await game.close()
-        return
-
-    # logger.debug("继续游戏")
-    try:
-        pic = game.draw_question_img()
-    except:
-        logger.exception("游戏出错")
-        await game.close()
-        await matcher.finish("遇到错误，结束游戏……", at_sender=True)
-
-    await matcher.finish(MessageSegment.image(pic), at_sender=True)
+    await MessageFactory(Image(pic)).finish(at_sender=True)
