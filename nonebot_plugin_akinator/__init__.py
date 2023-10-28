@@ -1,6 +1,7 @@
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters, require
 
 require("nonebot_plugin_saa")
+require("nonebot_plugin_session")
 
 from . import __main__ as __main__  # noqa: E402
 from .config import ConfigModel  # noqa: E402
