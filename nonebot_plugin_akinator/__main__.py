@@ -19,7 +19,10 @@ cmd_start = on_command("akinator", aliases={"aki"})
 async def _(matcher: Matcher, session_id: str = SessionId(SessionIdType.GROUP_USER)):
     game = Akinator.get(session_id)
     if game:
-        await matcher.finish("已有游戏正在进行中，如果想结束，请先发送「E」结束游戏", at_sender=True)
+        await matcher.finish(
+            "已有游戏正在进行中，如果想结束，请先发送「E」结束游戏",
+            at_sender=True,
+        )
 
     game = Akinator(session_id)
     try:
