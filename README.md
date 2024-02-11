@@ -20,7 +20,7 @@ _✨ 网络天才 ✨_
 <a href="https://pypi.python.org/pypi/nonebot-plugin-akinator">
   <img src="https://img.shields.io/pypi/v/nonebot-plugin-akinator.svg" alt="pypi">
 </a>
-<img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
+<img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
 <a href="https://pypi.python.org/pypi/nonebot-plugin-akinator">
   <img src="https://img.shields.io/pypi/dm/nonebot-plugin-akinator" alt="pypi download">
 </a>
