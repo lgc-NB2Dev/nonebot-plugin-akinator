@@ -6,7 +6,7 @@ from nonebot.log import logger
 from nonebot.matcher import Matcher
 from nonebot.params import EventMessage
 from nonebot.typing import T_State
-from nonebot_plugin_saa import Image, MessageFactory
+from nonebot_plugin_alconna.uniseg import UniMessage
 from nonebot_plugin_session import SessionId, SessionIdType
 
 from .akinator.akinator.exceptions import AkiNoQuestions, CantGoBackAnyFurther
@@ -33,7 +33,7 @@ async def _(matcher: Matcher, session_id: str = SessionId(SessionIdType.GROUP_US
         logger.exception("启动游戏失败")
         await matcher.finish("启动游戏失败，请检查后台输出")
 
-    await MessageFactory(Image(pic)).finish(at_sender=True)
+    await UniMessage.image(raw=pic).send(at_sender=True)
 
 
 ARG_DICT: Dict[str, Tuple[str, ...]] = {
@@ -108,4 +108,4 @@ async def _(matcher: Matcher, state: T_State):
 
         await matcher.finish("遇到错误，结束游戏……", at_sender=True)
 
-    await MessageFactory(Image(pic)).finish(at_sender=True)
+    await UniMessage.image(raw=pic).send(at_sender=True)
