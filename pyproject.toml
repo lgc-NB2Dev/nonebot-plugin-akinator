@@ -5,7 +5,7 @@ description = "Internet Genius - Akinator"
 authors = [{ name = "student_2333", email = "lgc2333@126.com" }]
 dependencies = [
     "nonebot2>=2.2.0",
-    "nonebot-plugin-alconna>=0.40.0rc1",
+    "nonebot-plugin-alconna>=0.40.1",
     "nonebot-plugin-session>=0.1.0",
     "aiohttp>=3.8.4",
     "pil-utils>=0.1.6",
