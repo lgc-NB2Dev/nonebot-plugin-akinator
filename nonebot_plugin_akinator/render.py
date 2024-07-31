@@ -131,37 +131,3 @@ async def render_answer_image(
         },
         "main",
     )
-
-
-from nonebot import get_driver
-
-driver = get_driver()
-
-
-@driver.on_startup
-async def _():
-    write_debug_file(
-        "{time}.jpg",
-        await render_question_image(
-            "defi.png",
-            11,
-            "喵~",
-        ),
-    )
-
-    from httpx import AsyncClient
-
-    async with AsyncClient(follow_redirects=True) as cli:
-        photo = (
-            (
-                await cli.get(
-                    "https://photos.clarinea.fr/BL_11_cn/600/partenaire/p/1467033320__202114264.jpeg",
-                )
-            )
-            .raise_for_status()
-            .content
-        )
-    write_debug_file(
-        "{time}.jpg",
-        await render_answer_image("喵", "喵喵喵喵喵喵", photo, "X"),
-    )
