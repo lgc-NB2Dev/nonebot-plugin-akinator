@@ -9,6 +9,7 @@ class ConfigModel(BaseModel):
 
     akinator_child_mode: bool = False
     akinator_language: str = "cn"
+    akinator_text_mode: bool = False
 
 
 config = get_plugin_config(ConfigModel)

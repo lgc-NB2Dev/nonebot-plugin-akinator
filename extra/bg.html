@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .parallax-overlay {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .parallax-overlay div:not(.rhombus) {
+        top: -5%;
+        left: -5%;
+        width: 110%;
+        height: 110%;
+        position: absolute;
+        background-size: auto 100%;
+        backface-visibility: hidden;
+      }
+
+      .parallax-overlay .parallax-layer-1 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_tr_1_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-2 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_tr_2_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-3 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_bl_2_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-4 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_bl_1_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-5 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_br_2_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-6 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_br_1_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .parallax-layer-7 {
+        background: url('https://cn.akinator.com/assets/img/smoke/smoke_tl_1_black.png')
+          no-repeat;
+      }
+
+      .parallax-overlay .rhombus {
+        position: absolute;
+        backface-visibility: hidden;
+      }
+
+      .parallax-overlay .rhombus-group {
+        text-align: center;
+      }
+
+      .parallax-overlay .rhombus-group .rhombus {
+        position: relative;
+      }
+
+      .parallax-overlay .rhombus svg {
+        width: 50px;
+        fill: white;
+        -webkit-animation: fadein 4s linear infinite; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 4s linear infinite; /* Firefox < 16 */
+        -ms-animation: fadein 4s linear infinite; /* Internet Explorer */
+        -o-animation: fadein 4s linear infinite; /* Opera < 12.1 */
+        animation: fadein 4s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="parallax-overlay"
+      id="parallax-overlay"
+      style="
+        width: 1920px;
+        height: 1080px;
+        background: url('https://cn.akinator.com/assets/img/bg.jpg') no-repeat
+          center/cover;
+      "
+    >
+      <div
+        class="parallax-layer-1"
+        style="transform: translate3d(600px, -120px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-2"
+        style="transform: translate3d(600px, -100px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-3"
+        style="transform: translate3d(0px, 40px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-4"
+        style="transform: translate3d(-50px, 25px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-5"
+        style="transform: translate3d(500px, -50px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-6"
+        style="transform: translate3d(500px, -100px, 0px)"
+      ></div>
+      <div
+        class="parallax-layer-7"
+        style="transform: translate3d(0px, -40px, 0px)"
+      ></div>
+      <div
+        class="rhombus rhombus-layer-1"
+        style="top: -3.5%; left: 12%; height: 70px; opacity: 0.8"
+      >
+        <svg viewBox="0 0 12 12" style="width: 70px">
+          <path
+            class="rhombus"
+            d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="rhombus rhombus-layer-2"
+        style="top: 10%; left: 20%; height: 30px; opacity: 0.8"
+      >
+        <svg viewBox="0 0 12 12" style="width: 30px">
+          <path
+            class="rhombus"
+            d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="rhombus rhombus-group group-1"
+        style="width: 50px; top: 18%; left: 8%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-3"
+          style="top: 0px; left: 0px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-4"
+          style="top: -1px; left: 0.3px; height: 40px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 40px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-5"
+          style="top: 0px; left: 0px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-layer-6"
+        style="top: 50%; right: 5%; height: 70px; opacity: 0.8"
+      >
+        <svg viewBox="0 0 12 12" style="width: 70px">
+          <path
+            class="rhombus"
+            d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="rhombus rhombus-layer-7"
+        style="top: 80%; left: 8%; height: 30px; opacity: 0.8"
+      >
+        <svg viewBox="0 0 12 12" style="width: 30px">
+          <path
+            class="rhombus"
+            d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="rhombus rhombus-layer-8"
+        style="top: 80%; right: 15%; height: 30px; opacity: 0.8"
+      >
+        <svg viewBox="0 0 12 12" style="width: 30px">
+          <path
+            class="rhombus"
+            d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        class="rhombus rhombus-group group-2"
+        style="width: 50px; top: 70%; left: 13%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-9"
+          style="top: 0px; left: 0px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-10"
+          style="top: 0px; left: 0px; height: 20px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 10px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-11"
+          style="top: 0px; left: 0px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-3"
+        style="width: 50px; top: 56%; left: 20%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-12"
+          style="top: 0px; left: 0px; height: 40px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 40px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-13"
+          style="top: 0px; right: 0.3px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-4"
+        style="width: 50px; top: 45%; left: 30%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-14"
+          style="top: 0px; left: 0px; height: 20px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 10px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-15"
+          style="top: 0px; left: 0px; height: 20px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 20px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-5"
+        style="width: 50px; top: 10%; right: 20%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-16"
+          style="top: 0px; left: 0px; height: 16px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 8px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-17"
+          style="top: 0px; left: 0px; height: 18px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 18px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-6"
+        style="width: 50px; top: 60%; right: 12%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-18"
+          style="top: 0px; right: 0.3px; height: 20px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 20px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-19"
+          style="top: 0px; left: 0px; height: 42px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 42px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-7"
+        style="width: 50px; top: 65%; right: 22%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-20"
+          style="top: 0px; left: 0px; height: 40px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 40px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-21"
+          style="top: 0px; right: 0.3px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rhombus rhombus-group group-8"
+        style="width: 50px; top: 20%; right: 15%; height: 50px; opacity: 0.8"
+      >
+        <div
+          class="rhombus rhombus-layer-22"
+          style="top: 0px; left: 0px; height: 40px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 40px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="rhombus rhombus-layer-23"
+          style="top: 0px; left: 0px; height: 15px; opacity: 0.8"
+        >
+          <svg viewBox="0 0 12 12" style="width: 15px">
+            <path
+              class="rhombus"
+              d="M5.9,1.2L0.7,6.5l5.2,5.4l5.2-5.4L5.9,1.2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

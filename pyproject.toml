@@ -6,9 +6,9 @@ authors = [{ name = "student_2333", email = "lgc2333@126.com" }]
 dependencies = [
     "nonebot2>=2.3.1",
     "nonebot-plugin-alconna>=0.48.0",
-    "nonebot-plugin-session>=0.3.1",
-    "aiohttp>=3.9.5",
-    "pil-utils>=0.1.10",
+    "nonebot-plugin-waiter>=0.7.1",
+    "cookit[jinja,loguru,pw]>=0.7.3",
+    "cooaki>=0.1.0",
 ]
 requires-python = ">=3.9,<4.0"
 readme = "README.md"
@@ -18,10 +18,7 @@ license = { text = "MIT" }
 homepage = "https://github.com/lgc2333/nonebot-plugin-akinator"
 
 [project.optional-dependencies]
-extra = [
-    "aiodns>=3.2.0",
-    "cchardet>=2.1.7",
-]
+image = ["nonebot-plugin-htmlrender>=0.3.2"]
 
 [tool.pdm.build]
 includes = []

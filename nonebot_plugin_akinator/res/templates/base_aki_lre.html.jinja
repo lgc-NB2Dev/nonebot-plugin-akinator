@@ -1,0 +1,71 @@
+{% extends 'base.html.jinja' %}
+
+{% block style -%}
+{{ super() }}
+<style>
+  .bg-mask-wrapper>.exit {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    /* gap: 4px; */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bg-mask-wrapper>.exit .desc {
+    font-size: 14px;
+  }
+
+  .main-wrapper {
+    margin: 0 auto;
+    /* width: fit-content; */
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-wrapper>.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .akitude {
+    width: 200px;
+    height: 325px;
+    background-size: 335px 548px;
+    background-position: 50% 55%;
+    background-repeat: no-repeat;
+  }
+
+  .main-wrapper>.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    flex: 1;
+  }
+</style>
+{%- endblock %}
+
+{% block main -%}
+<div class="exit">
+  <span class="f-icon">close</span>
+  <div class="desc">退出 (E)</div>
+</div>
+<div class="main-wrapper">
+  <div class="left">
+    {% block main_left -%}
+    <div class="akitude" style="background-image: url('/akitude/{{ akitude }}');"></div>
+    {%- endblock %}
+  </div>
+  <div class="right">
+    {% block main_right -%}
+    {%- endblock %}
+  </div>
+</div>
+{%- endblock %}

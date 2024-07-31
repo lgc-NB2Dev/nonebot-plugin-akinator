@@ -1,12 +1,12 @@
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters, require
 
+require("nonebot_plugin_waiter")
 require("nonebot_plugin_alconna")
-require("nonebot_plugin_session")
 
 from . import __main__ as __main__  # noqa: E402
 from .config import ConfigModel  # noqa: E402
 
-__version__ = "0.2.0.post1"
+__version__ = "1.0.0"
 __plugin_meta__ = PluginMetadata(
     name="Akinator",
     description="网络天才",
@@ -15,8 +15,8 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     config=ConfigModel,
     supported_adapters=inherit_supported_adapters(
+        "nonebot_plugin_waiter",
         "nonebot_plugin_alconna",
-        "nonebot_plugin_session",
     ),
     extra={"License": "MIT", "Author": "student_2333"},
 )

@@ -1,0 +1,110 @@
+{% extends 'base_aki_lre.html.jinja' %}
+
+{% block style -%}
+{{ super() }}
+<style>
+  .result-box {
+    display: flex;
+    align-items: center;
+  }
+
+  .question-box-tail,
+  .result-box>.content {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .result-box>.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .result-box>.content>.title {
+    padding: 2px;
+    text-align: center;
+    align-self: stretch;
+    background-color: var(--color);
+    color: #fff;
+    font-size: bold;
+  }
+
+  .result-box>.content>.body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .result-box>.content>.body>.name {
+    font-weight: bold;
+  }
+
+  .result-box>.content>.body>.desc {
+    font-size: 14px;
+  }
+
+  .result-below {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .image-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .image-box .image-wrapper {
+    align-self: stretch;
+    display: flex;
+  }
+
+  .image-box .image-wrapper>img {
+    width: 100%;
+  }
+
+  .image-box>.from {
+    font-size: 14px;
+  }
+
+  .mis-guess-btn {
+    align-self: stretch;
+    text-align: center;
+    padding: 2px;
+    border-radius: 16px;
+    background-color: var(--color);
+    color: #fff;
+  }
+</style>
+{%- endblock %}
+
+{% block main_right -%}
+<div class="result-box">
+  <div class="question-box-tail"></div>
+  <div class="content">
+    <div class="title">我想</div>
+    <div class="body">
+      <div class="name">{{ name }}</div>
+      <div class="desc">{{ description }}</div>
+    </div>
+  </div>
+</div>
+<div class="result-below">
+  <div class="image-box tb-border-box">
+    <div class="image-wrapper"><img src="/answer_photo" /></div>
+    <div class="from">From: {{ pseudo }}</div>
+  </div>
+  <div class="mis-guess-btn">猜错了？继续游戏 (C)</div>
+</div>
+{%- endblock %}

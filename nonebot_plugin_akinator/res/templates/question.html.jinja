@@ -1,0 +1,117 @@
+{% extends 'base_aki_lre.html.jinja' %}
+
+{% block style -%}
+{{ super() }}
+<style>
+  .question-box {
+    display: flex;
+  }
+
+  .question-box>.left-part .box,
+  .question-box>.right-part {
+    padding: 16px;
+  }
+
+  .question-box>.left-part {
+    display: flex;
+    align-items: center;
+  }
+
+  .question-box-tail,
+  .question-box>.left-part .box {
+    background-color: var(--color);
+  }
+
+  .question-box>.left-part .box {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: white;
+  }
+
+  .question-box>.left-part .index {
+    font-weight: bold;
+  }
+
+  .question-box>.right-part {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    flex: 1;
+  }
+
+  .main-wrapper>.right>.question-below {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .answer-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0 8px 0;
+    gap: 8px;
+  }
+
+  .answer-box>.line {
+    text-align: center;
+    width: 100%;
+    padding: 4px 0 4px 0;
+    background-image: linear-gradient(to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0));
+  }
+
+  .question-below .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    gap: 4px;
+  }
+
+  .question-below .back .f-icon {
+    display: flex;
+    padding: 2px;
+    background-color: var(--color);
+    color: #fff;
+  }
+
+  .question-below .back .desc {
+    font-size: 14px;
+  }
+</style>
+{%- endblock %}
+
+{% block main_right -%}
+<div class="question-box">
+  <div class="left-part">
+    <div class="question-box-tail"></div>
+    <div class="box">
+      <div class="diamond"></div>
+      <div class="index">{{ index }}</div>
+      <div class="diamond"></div>
+    </div>
+  </div>
+  <div class="right-part">{{ question }}</div>
+</div>
+<div class="question-below">
+  <div class="answer-box tb-border-box">
+    <div class="line">是 (Y)</div>
+    <div class="line">否 (N)</div>
+    <div class="line">不知道 (IDK)</div>
+    <div class="line">或许是 (P)</div>
+    <div class="line">或许不是 (PN)</div>
+  </div>
+  <div class="back">
+    <span class="f-icon">undo</span>
+    <div class="desc">上一问 (B)</div>
+  </div>
+</div>
+{%- endblock %}
