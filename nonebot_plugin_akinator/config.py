@@ -10,6 +10,7 @@ class ConfigModel(BaseModel):
     akinator_child_mode: bool = False
     akinator_language: str = "cn"
     akinator_text_mode: bool = False
+    akinator_operation_timeout: int = 120
 
 
 config = get_plugin_config(ConfigModel)

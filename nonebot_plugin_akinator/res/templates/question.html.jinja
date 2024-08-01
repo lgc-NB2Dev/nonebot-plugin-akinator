@@ -103,15 +103,17 @@
 </div>
 <div class="question-below">
   <div class="answer-box tb-border-box">
-    <div class="line">是 (Y)</div>
-    <div class="line">否 (N)</div>
-    <div class="line">不知道 (IDK)</div>
-    <div class="line">或许是 (P)</div>
-    <div class="line">或许不是 (PN)</div>
+    <div class="line">1. 是 (Y)</div>
+    <div class="line">2. 否 (N)</div>
+    <div class="line">3. 不知道 (IDK)</div>
+    <div class="line">4. 或许是 (P)</div>
+    <div class="line">5. 或许不是 (PN)</div>
   </div>
+  {% if index != 1 -%}
   <div class="back">
     <span class="f-icon">undo</span>
     <div class="desc">上一问 (B)</div>
   </div>
+  {%- endif %}
 </div>
 {%- endblock %}

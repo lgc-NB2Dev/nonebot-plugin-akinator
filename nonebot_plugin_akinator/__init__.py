@@ -1,5 +1,6 @@
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters, require
 
+require("nonebot_plugin_htmlrender")
 require("nonebot_plugin_waiter")
 require("nonebot_plugin_alconna")
 
@@ -15,6 +16,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     config=ConfigModel,
     supported_adapters=inherit_supported_adapters(
+        "nonebot_plugin_htmlrender",
         "nonebot_plugin_waiter",
         "nonebot_plugin_alconna",
     ),

@@ -108,18 +108,19 @@ async def render_question_image(
 async def render_answer_image(
     router_group: RouterGroup,
     name: str,
-    description: str,
-    photo: bytes,
-    pseudo: str,
+    description: Optional[str] = None,
+    photo: Optional[bytes] = None,
+    pseudo: Optional[str] = None,
 ):
-    photo_mime = "image"
-    with suppress(IndexError):
-        photo_mime = cast(List[str], fleep.get(photo[:128]).mime)[0]
+    if photo:
+        photo_mime = "image"
+        with suppress(IndexError):
+            photo_mime = cast(List[str], fleep.get(photo[:128]).mime)[0]
 
-    @router_group.router(f"{ROUTE_BASE_URL}/answer_photo")
-    @log_router_err()
-    async def _(route: Route, **_):
-        await route.fulfill(body=photo, content_type=photo_mime)
+        @router_group.router(f"{ROUTE_BASE_URL}/answer_photo")
+        @log_router_err()
+        async def _(route: Route, **_):
+            await route.fulfill(body=photo, content_type=photo_mime)
 
     return (
         "answer.html.jinja",
@@ -127,6 +128,7 @@ async def render_answer_image(
             "akitude": "confiant.png",
             "name": name,
             "description": description,
+            "has_photo": bool(photo),
             "pseudo": pseudo,
         },
         "main",

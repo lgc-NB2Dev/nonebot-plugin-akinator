@@ -96,15 +96,17 @@
     <div class="title">我想</div>
     <div class="body">
       <div class="name">{{ name }}</div>
-      <div class="desc">{{ description }}</div>
+      {% if description %}<div class="desc">{{ description }}</div>{% endif %}
     </div>
   </div>
 </div>
 <div class="result-below">
+  {% if has_photo -%}
   <div class="image-box tb-border-box">
     <div class="image-wrapper"><img src="/answer_photo" /></div>
-    <div class="from">From: {{ pseudo }}</div>
+    {% if pseudo %}<div class="from">From: {{ pseudo }}</div>{% endif %}
   </div>
+  {%- endif %}
   <div class="mis-guess-btn">猜错了？继续游戏 (C)</div>
 </div>
 {%- endblock %}
