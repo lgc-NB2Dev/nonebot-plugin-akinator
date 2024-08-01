@@ -27,6 +27,7 @@ async def build_answer_msg_text(aki: Akinator, data: WinResp) -> UniMessage:
         if data.pseudo:
             msg += f"From: {data.pseudo}"
 
+    msg += "\n猜错了？继续游戏 (C)"
     return msg
 
 
@@ -56,7 +57,7 @@ async def build_question_msg_text(aki: Akinator) -> UniMessage:
         f"\n"
         f"1. 是 (Y) | 2. 否 (N) | 3. 不知道 (IDK)\n"
         f"4. 或许是 (P) | 5. 或许不是 (PN)\n"
-        f"上一问 (B) | 退出 (E)",
+        f"{'' if state.step == 0 else '上一问 (B) | '}退出 (E)",
     )
 
 

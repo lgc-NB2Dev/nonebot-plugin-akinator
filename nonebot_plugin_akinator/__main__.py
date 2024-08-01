@@ -1,3 +1,4 @@
+import time
 from contextlib import asynccontextmanager
 from enum import Enum, auto
 from typing import Dict, Set, Tuple, Union
@@ -7,8 +8,10 @@ from cookit.nonebot.alconna import RecallContext
 from httpx import HTTPError
 from nonebot import logger, on_command
 from nonebot.adapters import Event as BaseEvent
-from nonebot.matcher import Matcher, current_matcher
+from nonebot.exception import NoneBotException
+from nonebot.matcher import Matcher
 from nonebot.params import EventPlainText
+from nonebot_plugin_alconna.uniseg import UniMessage
 from nonebot_plugin_waiter import waiter
 
 from .config import config
@@ -40,42 +43,52 @@ async def with_active_session(session_id: str):
     active_sessions.add(session_id)
     try:
         yield
+    except NoneBotException:
+        raise
     except Exception:
-        await current_matcher.get().send("出现意外错误，结束游戏")
+        logger.exception("Unexpected error during game")
+        await UniMessage.text("出现意外错误，结束游戏").send(at_sender=True)
     finally:
         active_sessions.discard(session_id)
     return
 
 
-@waiter(waits=["message"], keep_session=True)
-async def action_waiter(
+async def action_waiter_handler(
     msg: str = EventPlainText(),
 ) -> Union[Answer, OtherAction, None]:
     msg = msg.strip().lower()
     return next((k for k, v in ACTION_DICT.items() if msg in v), None)
 
 
-@waiter(waits=["message"], keep_session=True)
-async def continue_waiter(msg: str = EventPlainText()) -> bool:
+def make_action_waiter(**kwargs):
+    return waiter(waits=["message"], keep_session=True, **kwargs)(action_waiter_handler)
+
+
+async def continue_waiter_handler(msg: str = EventPlainText()) -> bool:
     return msg.strip().lower() in CONTINUE_ACTION
+
+
+def make_continue_waiter(**kwargs):
+    return waiter(waits=["message"], keep_session=True, **kwargs)(
+        continue_waiter_handler,
+    )
 
 
 async def wait_and_handle_action(aki: Akinator, recall: RecallContext) -> bool:
     """return should end game"""
 
-    m = current_matcher.get()
-
+    wait_time_end = time.time() + config.akinator_operation_timeout
     while True:
-        action = await action_waiter.wait(
+        action = await make_action_waiter().wait(
             before=None,
-            timeout=config.akinator_operation_timeout,
+            timeout=wait_time_end - time.time(),
         )
-        if not action:
-            await m.send("等待超时，退出游戏")
+        if action is None:
+            await UniMessage.text("等待超时，退出游戏").send(at_sender=True)
             return True
 
         if action is OtherAction.EXIT:
-            await m.send("已退出游戏")
+            await UniMessage.text("已退出游戏").send(at_sender=True)
             return True
 
         try:
@@ -84,19 +97,32 @@ async def wait_and_handle_action(aki: Akinator, recall: RecallContext) -> bool:
             else:
                 resp = await aki.answer(action)
         except HTTPError:
-            await recall.send("请求失败，请重试")
+            logger.exception("Request error occurred")
+            await recall.send("请求失败，请重试", at_sender=True)
             continue
         except CanNotGoBackError:
-            await recall.send("无法返回上一问，请重试")
+            await recall.send("无法返回上一问，请重试", at_sender=True)
             continue
         except GameEndedError:
-            await m.send("我想不出来更多问题了，游戏结束")
+            await UniMessage.text("我想不出来更多问题了，游戏结束").send(at_sender=True)
             return True
 
         if isinstance(resp, WinResp):
             await (await build_answer_msg(aki, resp)).send()
-            if not (await continue_waiter.wait()):
+
+            if not (await make_continue_waiter().wait()):
                 return True
+
+            for _ in range(3):
+                try:
+                    await aki.continue_answer()
+                except HTTPError:
+                    logger.exception("Request failed when continuing")
+                    continue
+                break
+            else:
+                await UniMessage.text("请求失败，结束游戏").send(at_sender=True)
+
         return False
 
 
@@ -114,6 +140,7 @@ async def _(m: Matcher, ev: BaseEvent):
             lang=config.akinator_language,
             child_mode=config.akinator_child_mode,
             proxy=config.proxy,
+            timeout=config.akinator_request_timeout,
         )
         try:
             await aki.start()
@@ -123,6 +150,6 @@ async def _(m: Matcher, ev: BaseEvent):
 
         while not aki.state.ended:
             async with RecallContext() as recall:
-                await recall.send(await build_question_msg(aki))
+                await recall.send(await build_question_msg(aki), at_sender=True)
                 if await wait_and_handle_action(aki, recall):
                     break

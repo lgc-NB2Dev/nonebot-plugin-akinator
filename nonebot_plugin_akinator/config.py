@@ -11,6 +11,7 @@ class ConfigModel(BaseModel):
     akinator_language: str = "cn"
     akinator_text_mode: bool = False
     akinator_operation_timeout: int = 120
+    akinator_request_timeout: float = 5
 
 
 config = get_plugin_config(ConfigModel)

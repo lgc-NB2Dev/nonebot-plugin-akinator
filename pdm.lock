@@ -5,7 +5,7 @@
 groups = ["default", "image"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:926e7bb90b73d3f662d758f29743c4671c48a59262308d2898d2d828244d5a40"
+content_hash = "sha256:991aafbd9f3f4f3cf32825243aed85ce35b0d6ea598012f4c522c349fc964961"
 
 [[metadata.targets]]
 requires_python = "~=3.9"
@@ -70,7 +70,7 @@ files = [
 
 [[package]]
 name = "arclet-alconna-tools"
-version = "0.7.6"
+version = "0.7.7"
 requires_python = ">=3.8"
 summary = "Builtin Tools for Alconna"
 groups = ["default"]
@@ -79,8 +79,8 @@ dependencies = [
     "nepattern<1.0.0,>=0.7.3",
 ]
 files = [
-    {file = "arclet_alconna_tools-0.7.6-py3-none-any.whl", hash = "sha256:fdd1cb900603ce6bb00295bf7bf7f60dfdb764f0614abe248cdcb754e5149edd"},
-    {file = "arclet_alconna_tools-0.7.6.tar.gz", hash = "sha256:7cb7dc54c1c2198529c63227739423401051b8489374f1a7a3efa0c4e70b2a22"},
+    {file = "arclet_alconna_tools-0.7.7-py3-none-any.whl", hash = "sha256:9f851a4fd51f4b5a4a796b45982f3ccdb9b32896de3673d82b4ef08a22c04b46"},
+    {file = "arclet_alconna_tools-0.7.7.tar.gz", hash = "sha256:9b73af440448842575fa46979385dad9cc42e6d55aa5dddf217d169aac3f48c2"},
 ]
 
 [[package]]
@@ -108,7 +108,7 @@ files = [
 
 [[package]]
 name = "cooaki"
-version = "0.1.0"
+version = "0.2.0"
 requires_python = "<4.0,>=3.9"
 summary = "Another Async Akinator API Wrapper"
 groups = ["default"]
@@ -117,8 +117,8 @@ dependencies = [
     "httpx>=0.27.0",
 ]
 files = [
-    {file = "cooaki-0.1.0-py3-none-any.whl", hash = "sha256:6383c4deba3d90c884e3fcf656ed58bdf907e3b2cd86ba5730c61e7d6eac3148"},
-    {file = "cooaki-0.1.0.tar.gz", hash = "sha256:d4109ff63702b7ed42fcf497068f06b562469d2fd5573ef2d29ac39409a6a991"},
+    {file = "cooaki-0.2.0-py3-none-any.whl", hash = "sha256:4d346f6c6db79eb6c60f67c59fbbc57582e3952aea1efe2ed1ffafc0dd96dff9"},
+    {file = "cooaki-0.2.0.tar.gz", hash = "sha256:789735cd6dd3b5c5e731f59135e6677d3abb63b2e2a04dca2b91f6413dc50539"},
 ]
 
 [[package]]
