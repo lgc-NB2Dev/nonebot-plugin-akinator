@@ -1,3 +1,14 @@
+# ruff: noqa: E402
+
+from importlib.util import find_spec
+
+from nonebot import require
+
+if not find_spec("nonebot_plugin_htmlrender"):
+    raise ImportError
+require("nonebot_plugin_htmlrender")
+
+
 import mimetypes
 from contextlib import suppress
 from pathlib import Path
