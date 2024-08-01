@@ -108,13 +108,16 @@ plugins = [
 
 ## ⚙️ 配置
 
-在 nonebot2 项目的`.env`文件中添加下表中的必填配置
+在 nonebot2 项目的 `.env` 文件中添加下表中的必填配置
 
-|        配置项         | 必填 | 默认值  |                          说明                          |
-| :-------------------: | :--: | :-----: | :----------------------------------------------------: |
-|        `PROXY`        |  否  |   无    |                访问 Akinator 使用的代理                |
-| `AKINATOR_CHILD_MODE` |  否  | `False` | 是否启用 Akinator 的儿童模式（结果不会出现 NSFW 人物） |
-|  `AKINATOR_LANGUAGE`  |  否  |  `cn`   |                    Akinator 的语言                     |
+|            配置项            | 必填 | 默认值  |                          说明                          |
+| :--------------------------: | :--: | :-----: | :----------------------------------------------------: |
+|           `PROXY`            |  否  |   无    |                访问 Akinator 使用的代理                |
+|    `AKINATOR_CHILD_MODE`     |  否  | `False` | 是否启用 Akinator 的儿童模式（结果不会出现 NSFW 人物） |
+|     `AKINATOR_LANGUAGE`      |  否  |  `cn`   |                    Akinator 的语言                     |
+|     `AKINATOR_TEXT_MODE`     |  否  |  `cn`   |                    是否启用文字模式                    |
+| `AKINATOR_OPERATION_TIMEOUT` |  否  |  `cn`   |               插件等待消息回复的超时时间               |
+|  `AKINATOR_REQUEST_TIMEOUT`  |  否  |  `cn`   |                 插件网络请求的超时时间                 |
 
 ## 🎉 使用
 
@@ -122,13 +125,20 @@ plugins = [
 
 开始游戏后，直接发送你的答案即可（序号和文字均可）
 
+如果 `htmlrender` 依赖已安装，默认将会渲染图片，如果没有则会回退到文本模式
+
 ### 效果图
 
-<details>
-  <summary>点击展开</summary>
+<details open>
+  <summary>点击展开/收起</summary>
 
-![Alt text](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063509.png)  
-![Alt text](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ%E5%9B%BE%E7%89%8720230415063607.png)
+#### 文本模式
+
+![文本模式](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ20240802-001216.png)
+
+#### 图片模式
+
+![图片模式](https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/akinator/QQ20240802-000937.png)
 
 </details>
 
@@ -141,7 +151,7 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 
 ## 💡 鸣谢
 
-### [Infiniticity/akinator.py](https://github.com/Infiniticity/akinator.py)
+### [lgc2333/cooaki](https://github.com/lgc2333/cooaki)
 
 - Akinator API 的封装
 
@@ -156,6 +166,20 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 感谢大家的赞助！你们的赞助将是我继续创作的动力！
 
 ## 📝 更新日志
+
+### 1.0.1
+
+- 修复 htmlrender 依赖不是可选的 bug
+- 修复不会自动撤回游戏结束前一条问题消息的 Bug
+
+### 1.0.0
+
+- 插件重构：
+  - 整体代码重构，换用自己写的 API 包装库，使用 htmlrender 渲染图片，同时支持文本模式
+  - 配置项改动：
+    - 新增 `AKINATOR_TEXT_MODE`
+    - 新增 `AKINATOR_OPERATION_TIMEOUT`
+    - 新增 `AKINATOR_REQUEST_TIMEOUT`
 
 ### 0.2.0
 

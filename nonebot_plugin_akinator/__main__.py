@@ -1,3 +1,4 @@
+import asyncio
 import time
 from contextlib import asynccontextmanager
 from enum import Enum, auto
@@ -108,7 +109,8 @@ async def wait_and_handle_action(aki: Akinator, recall: RecallContext) -> bool:
             return True
 
         if isinstance(resp, WinResp):
-            await (await build_answer_msg(aki, resp)).send()
+            asyncio.create_task(recall.recall())
+            await (await build_answer_msg(aki, resp)).send(at_sender=True)
 
             if not (await make_continue_waiter().wait()):
                 return True
