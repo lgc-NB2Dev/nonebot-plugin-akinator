@@ -18,5 +18,5 @@ __plugin_meta__ = PluginMetadata(
         "nonebot_plugin_waiter",
         "nonebot_plugin_alconna",
     ),
-    extra={"License": "MIT", "Author": "student_2333"},
+    extra={"License": "MIT", "Author": "LgCookie"},
 )
