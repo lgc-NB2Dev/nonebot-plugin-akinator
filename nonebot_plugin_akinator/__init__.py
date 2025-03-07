@@ -6,7 +6,7 @@ require("nonebot_plugin_alconna")
 from . import __main__ as __main__  # noqa: E402
 from .config import ConfigModel  # noqa: E402
 
-__version__ = "1.0.1.post1"
+__version__ = "1.0.1.post2"
 __plugin_meta__ = PluginMetadata(
     name="Akinator",
     description="网络天才",
