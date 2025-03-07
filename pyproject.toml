@@ -20,7 +20,7 @@ homepage = "https://github.com/lgc2333/nonebot-plugin-akinator"
 [project.optional-dependencies]
 image = [
     "nonebot-plugin-htmlrender>=0.5.1",
-    "cookit[jinja,pw]>=0.9.3"，
+    "cookit[jinja,pw]>=0.9.3",
     "fleep>=1.0.1",
 ]
 
