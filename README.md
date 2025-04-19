@@ -50,7 +50,7 @@ _✨ 网络天才 ✨_
 
 ## 📖 介绍
 
-把网络天才 Akinator 搬进你的 Bot !
+把网络天才 Akinator 搬进你的 Bot！
 
 ## 💿 安装
 
@@ -119,14 +119,16 @@ plugins = [
 
 在 nonebot2 项目的 `.env` 文件中添加下表中的必填配置
 
-|            配置项            | 必填 | 默认值  |                          说明                          |
-| :--------------------------: | :--: | :-----: | :----------------------------------------------------: |
-|           `PROXY`            |  否  |   无    |                访问 Akinator 使用的代理                |
-|    `AKINATOR_CHILD_MODE`     |  否  | `False` | 是否启用 Akinator 的儿童模式（结果不会出现 NSFW 人物） |
-|     `AKINATOR_LANGUAGE`      |  否  |  `cn`   |                    Akinator 的语言                     |
-|     `AKINATOR_TEXT_MODE`     |  否  |  `cn`   |                    是否启用文字模式                    |
-| `AKINATOR_OPERATION_TIMEOUT` |  否  |  `cn`   |               插件等待消息回复的超时时间               |
-|  `AKINATOR_REQUEST_TIMEOUT`  |  否  |  `cn`   |                 插件网络请求的超时时间                 |
+|            配置项            | 必填 |    默认值    |                           说明                           |
+| :--------------------------: | :--: | :----------: | :------------------------------------------------------: |
+|           `PROXY`            |  否  |      无      |    访问 Akinator 使用的代理（仅在使用 HTTPX 时生效）     |
+|    `AKINATOR_CHILD_MODE`     |  否  |   `False`    |  是否启用 Akinator 的儿童模式（结果不会出现 NSFW 人物）  |
+|     `AKINATOR_LANGUAGE`      |  否  |     `cn`     |                     Akinator 的语言                      |
+|     `AKINATOR_TEXT_MODE`     |  否  |     `cn`     |                     是否启用文字模式                     |
+| `AKINATOR_OPERATION_TIMEOUT` |  否  |     `cn`     |                插件等待消息回复的超时时间                |
+|  `AKINATOR_REQUEST_TIMEOUT`  |  否  |     `cn`     |                  插件网络请求的超时时间                  |
+|    `AKINATOR_CLIENT_TYPE`    |  否  | `playwright` | 访问 Akinator 使用的客户端，可选 `httpx` 与 `playwright` |
+| `AKINATOR_BASE_URL_TEMPLATE` |  否  |    `...`     |                   自定义访问使用的 URL                   |
 
 ## 🎉 使用
 
@@ -134,7 +136,7 @@ plugins = [
 
 开始游戏后，直接发送你的答案即可（序号和文字均可）
 
-如果 `htmlrender` 依赖已安装，默认将会渲染图片，如果没有则会回退到文本模式
+如无法使用请参见 [#21](https://github.com/lgc-NB2Dev/nonebot-plugin-akinator/issues/21)
 
 ### 效果图
 
@@ -164,10 +166,6 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 
 - Akinator API 的封装
 
-### [MeetWq/pil-utils](https://github.com/MeetWq/pil-utils/)
-
-- Pillow 工具库
-
 ## 💰 赞助
 
 **[赞助我](https://blog.lgc2333.top/donate)**
@@ -175,6 +173,10 @@ Telegram：[@lgc2333](https://t.me/lgc2333)
 感谢大家的赞助！你们的赞助将是我继续创作的动力！
 
 ## 📝 更新日志
+
+### 1.0.2
+
+- 加入绕过 Cloudflare 的方式
 
 ### 1.0.1
 

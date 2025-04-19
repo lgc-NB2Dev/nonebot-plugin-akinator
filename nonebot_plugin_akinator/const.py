@@ -1,3 +1,4 @@
+from importlib.util import find_spec
 from pathlib import Path
 
 RES_DIR = Path(__file__).parent / "res"
@@ -11,3 +12,5 @@ for _p in (DATA_DIR, DATA_AKITUDE_DIR):
 DATA_ADDITIONAL_CSS_PATH = DATA_DIR / "additional.css"
 if not DATA_ADDITIONAL_CSS_PATH.exists():
     DATA_ADDITIONAL_CSS_PATH.write_text("")
+
+HTML_RENDER_AVAILABLE = find_spec("nonebot_plugin_htmlrender") is not None

@@ -2,9 +2,18 @@ import asyncio
 import time
 from contextlib import asynccontextmanager
 from enum import Enum, auto
-from typing import Dict, Set, Tuple, Union
+from typing import Optional, Union
 
-from cooaki import Akinator, Answer, CanNotGoBackError, GameEndedError, WinResp
+from cooaki import (
+    Answer,
+    BaseAkinator,
+    CanNotGoBackError,
+    GameEndedError,
+    PlaywrightAkinator,
+    WinResp,
+)
+from cooaki.akinator.httpx import HTTPXAkinator
+from cookit import nullcontext
 from cookit.nonebot.alconna import RecallContext
 from httpx import HTTPError
 from nonebot import logger, on_command
@@ -15,8 +24,14 @@ from nonebot.params import EventPlainText
 from nonebot_plugin_alconna.uniseg import UniMessage
 from nonebot_plugin_waiter import waiter
 
+from nonebot_plugin_akinator.const import HTML_RENDER_AVAILABLE
+
 from .config import config
 from .message import build_answer_msg, build_question_msg
+
+get_new_page = None
+if HTML_RENDER_AVAILABLE:
+    from nonebot_plugin_htmlrender import get_new_page
 
 
 class OtherAction(str, Enum):
@@ -24,7 +39,7 @@ class OtherAction(str, Enum):
     EXIT = auto()
 
 
-ACTION_DICT: Dict[Union[Answer, OtherAction], Tuple[str, ...]] = {
+ACTION_DICT: dict[Union[Answer, OtherAction], tuple[str, ...]] = {
     Answer.YES: ("1", "y", "yes", "是", "s", "真", "true"),
     Answer.NO: ("2", "n", "no", "否", "f", "不是", "bs", "假", "false"),
     Answer.I_DONT_KNOW: ("3", "i", "idk", "i dont know", "i don't know", "不知道", "bzd", "不清楚", "bqc"),
@@ -36,7 +51,7 @@ ACTION_DICT: Dict[Union[Answer, OtherAction], Tuple[str, ...]] = {
 CONTINUE_ACTION = ("c", "continue", "继续")
 
 
-active_sessions: Set[str] = set()
+active_sessions: set[str] = set()
 
 
 @asynccontextmanager
@@ -51,7 +66,6 @@ async def with_active_session(session_id: str):
         await UniMessage.text("出现意外错误，结束游戏").send(at_sender=True)
     finally:
         active_sessions.discard(session_id)
-    return
 
 
 async def action_waiter_handler(
@@ -65,8 +79,8 @@ def make_action_waiter(**kwargs):
     return waiter(waits=["message"], keep_session=True, **kwargs)(action_waiter_handler)
 
 
-async def continue_waiter_handler(msg: str = EventPlainText()) -> bool:
-    return msg.strip().lower() in CONTINUE_ACTION
+async def continue_waiter_handler(msg: str = EventPlainText()) -> Optional[bool]:
+    return (msg.strip().lower() in CONTINUE_ACTION) or None
 
 
 def make_continue_waiter(**kwargs):
@@ -75,7 +89,7 @@ def make_continue_waiter(**kwargs):
     )
 
 
-async def wait_and_handle_action(aki: Akinator, recall: RecallContext) -> bool:
+async def wait_and_handle_action(aki: BaseAkinator, recall: RecallContext) -> bool:
     """return should end game"""
 
     wait_time_end = time.time() + config.akinator_operation_timeout
@@ -137,12 +151,28 @@ async def _(m: Matcher, ev: BaseEvent):
     if session_id in active_sessions:
         await m.finish("当前对话有游戏正在进行中，请先退出")
 
-    async with with_active_session(session_id):
-        aki = Akinator(
-            lang=config.akinator_language,
-            child_mode=config.akinator_child_mode,
-            proxy=config.proxy,
-            timeout=config.akinator_request_timeout,
+    new_page_ctx = (
+        get_new_page()
+        if config.akinator_client_type == "playwright" and get_new_page
+        else nullcontext()
+    )
+    async with with_active_session(session_id), new_page_ctx as page:
+        aki = (
+            PlaywrightAkinator(
+                page,
+                lang=config.akinator_language,
+                child_mode=config.akinator_child_mode,
+                base_url_template=config.akinator_base_url_template,
+                timeout=config.akinator_request_timeout,
+            )
+            if page
+            else HTTPXAkinator(
+                lang=config.akinator_language,
+                child_mode=config.akinator_child_mode,
+                base_url_template=config.akinator_base_url_template,
+                timeout=config.akinator_request_timeout,
+                proxy=config.proxy,
+            )
         )
         try:
             await aki.start()
