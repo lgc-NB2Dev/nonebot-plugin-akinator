@@ -18,12 +18,18 @@ license = { text = "MIT" }
 [project.urls]
 homepage = "https://github.com/lgc2333/nonebot-plugin-akinator"
 
+[project.optional-dependencies]
+image = ["nonebot-plugin-htmlrender>=0.6.5", "cookit[jinja,pw]>=0.11.0"]
+patchright = [
+    "nonebot-plugin-htmlrender>=0.6.5",
+    "cooaki[patchright]>=0.3.0.post1",
+]
+
 [project.entry-points.nb_scripts]
 akinator-patch-import = "nonebot_plugin_akinator.cli.patch_import:main"
 
 [dependency-groups]
-image = ["nonebot-plugin-htmlrender>=0.6.5", "cookit[jinja,pw]>=0.11.0"]
-patchright = ["nonebot-plugin-htmlrender>=0.6.5", "cooaki[patchright]>=0.3.0.post1"]
+dev = []
 
 [tool.pdm.build]
 includes = []

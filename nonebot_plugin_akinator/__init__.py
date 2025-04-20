@@ -14,7 +14,7 @@ if HTML_RENDER_AVAILABLE:
 from . import __main__ as __main__  # noqa: E402
 from .config import ConfigModel, config  # noqa: E402
 
-__version__ = "1.0.2"
+__version__ = "1.0.2.post1"
 __plugin_meta__ = PluginMetadata(
     name="Akinator",
     description="网络天才",
