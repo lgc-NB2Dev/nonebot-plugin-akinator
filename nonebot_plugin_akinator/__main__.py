@@ -147,6 +147,7 @@ cmd_aki = on_command("akinator", aliases={"aki"})
 
 @cmd_aki.handle()
 async def _(m: Matcher, ev: BaseEvent):
+    matcher.stop_propagation()  # ✨ 阻止其他 matcher（包括其他插件）继续处理
     session_id = ev.get_session_id()
     if session_id in active_sessions:
         await m.finish("当前对话有游戏正在进行中，请先退出")
