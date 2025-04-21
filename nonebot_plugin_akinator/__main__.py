@@ -142,7 +142,7 @@ async def wait_and_handle_action(aki: BaseAkinator, recall: RecallContext) -> bo
         return False
 
 
-cmd_aki = on_command("akinator", aliases={"aki"})
+cmd_aki = on_command("akinator", aliases={"aki"}, block=True)
 
 
 @cmd_aki.handle()
