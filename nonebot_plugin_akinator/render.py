@@ -86,7 +86,8 @@ def renderer(
             additional_style=f"<style>\n{additional_css}\n</style>",
             **render_kwargs,
         )
-        debug.write(html, "{time}.html")
+        if debug.enabled:
+            debug.write(html, "{time}.html")
 
         @new_router_group.router(f"{ROUTE_BASE_URL}/")
         @log_router_err()
