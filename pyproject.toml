@@ -4,14 +4,14 @@ dynamic = ["version"]
 description = "Internet Genius - Akinator"
 authors = [{ name = "LgCookie", email = "lgc2333@126.com" }]
 dependencies = [
-    "nonebot2>=2.4.1",
-    "nonebot-plugin-alconna>=0.57.2",
+    "nonebot2>=2.4.3",
+    "nonebot-plugin-alconna>=0.59.4",
     "nonebot-plugin-waiter>=0.8.1",
-    "cookit[loguru,nonebot-alconna]>=0.11.0",
+    "cookit[loguru,nonebot-alconna]>=0.13.0",
     "fleep>=1.0.1",
-    "cooaki>=0.3.0.post1",
+    "cooaki>=0.3.0.post2",
 ]
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 readme = "README.md"
 license = { text = "MIT" }
 
@@ -19,10 +19,10 @@ license = { text = "MIT" }
 homepage = "https://github.com/lgc2333/nonebot-plugin-akinator"
 
 [project.optional-dependencies]
-image = ["nonebot-plugin-htmlrender>=0.6.5", "cookit[jinja,pw]>=0.11.0"]
+image = ["nonebot-plugin-htmlrender>=0.6.5", "cookit[jinja,pw]>=0.13.0"]
 patchright = [
-    "nonebot-plugin-htmlrender>=0.6.5",
-    "cooaki[patchright]>=0.3.0.post1",
+    "nonebot-plugin-htmlrender>=0.6.6",
+    "cooaki[patchright]>=0.3.0.post2",
 ]
 
 [project.entry-points.nb_scripts]
