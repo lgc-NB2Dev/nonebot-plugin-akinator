@@ -24,6 +24,7 @@ patchright = [
     "nonebot-plugin-htmlrender>=0.6.6",
     "cooaki[patchright]>=0.3.0.post2",
 ]
+all = ["nonebot-plugin-akinator[image,patchright]"]
 
 [project.entry-points.nb_scripts]
 akinator-patch-import = "nonebot_plugin_akinator.cli.patch_import:main"
@@ -31,13 +32,9 @@ akinator-patch-import = "nonebot_plugin_akinator.cli.patch_import:main"
 [dependency-groups]
 dev = []
 
-[tool.pdm.build]
-includes = []
-
-[tool.pdm.version]
-source = "file"
-path = "nonebot_plugin_akinator/__init__.py"
-
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "nonebot_plugin_akinator/__init__.py"
